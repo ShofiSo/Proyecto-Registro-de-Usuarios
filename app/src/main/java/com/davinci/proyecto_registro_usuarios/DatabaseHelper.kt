@@ -11,7 +11,7 @@ import javax.crypto.SecretKeyFactory
 import javax.crypto.spec.PBEKeySpec
 
 class DatabaseHelper(context: Context) :
-    SQLiteOpenHelper(context, "MiPerfil.db", null, 1) {
+    SQLiteOpenHelper(context, "MiPerfil.db", null, 2) {
 
     override fun onCreate(db: SQLiteDatabase) {
         val crearTabla = """
@@ -26,13 +26,13 @@ class DatabaseHelper(context: Context) :
 
         db.execSQL(crearTabla)
     }
-
     override fun onUpgrade(
         db: SQLiteDatabase,
         oldVersion: Int,
         newVersion: Int
     ) {
-
+        db.execSQL("DROP TABLE IF EXISTS usuarios")
+        onCreate(db)
     }
 
     private fun generarHash(password: String, salt: ByteArray): String {
@@ -94,5 +94,20 @@ class DatabaseHelper(context: Context) :
         db.close()
 
         return valido
+    }
+    fun existeUsuario(correo: String): Boolean {
+        val db = readableDatabase
+
+        val cursor = db.rawQuery(
+            "SELECT id FROM usuarios WHERE correo = ?",
+            arrayOf(correo.trim())
+        )
+
+        val existe = cursor.moveToFirst()
+
+        cursor.close()
+        db.close()
+
+        return existe
     }
 }
