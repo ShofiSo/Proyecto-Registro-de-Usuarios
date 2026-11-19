@@ -110,4 +110,23 @@ class DatabaseHelper(context: Context) :
 
         return existe
     }
+    fun obtenerNombre(correo: String): String? {
+        val db = readableDatabase
+
+        val cursor = db.rawQuery(
+            "SELECT nombre FROM usuarios WHERE correo = ?",
+            arrayOf(correo)
+        )
+
+        var nombre: String? = null
+
+        if (cursor.moveToFirst()) {
+            nombre = cursor.getString(0)
+        }
+
+        cursor.close()
+        db.close()
+
+        return nombre
+    }
 }

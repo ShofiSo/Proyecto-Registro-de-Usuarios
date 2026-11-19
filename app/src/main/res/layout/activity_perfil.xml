@@ -1,0 +1,119 @@
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F3F5FA"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MI PERFIL"
+            android:textColor="#244B83"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="25dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/bg_card"
+            android:elevation="5dp"
+            android:padding="24dp">
+
+            <ImageView
+                android:id="@+id/imgPerfil"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:src="@android:drawable/ic_menu_myplaces"
+                android:background="#E5EAF3"
+                android:scaleType="centerCrop"
+                android:padding="20dp"
+                android:contentDescription="Fotografía de perfil"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bienvenido a tu perfil"
+                android:textColor="#244B83"
+                android:textSize="21sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="25dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nombre completo"
+                android:textColor="#263238"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvNombrePerfil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nombre del usuario"
+                android:textColor="#757575"
+                android:textSize="17sp"
+                android:paddingTop="8dp"
+                android:paddingBottom="18dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Correo electrónico"
+                android:textColor="#263238"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvCorreoPerfil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="correo@ejemplo.com"
+                android:textColor="#757575"
+                android:textSize="17sp"
+                android:paddingTop="8dp"
+                android:paddingBottom="25dp"/>
+
+            <Button
+                android:id="@+id/btnGaleria"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:text="SELECCIONAR DE GALERÍA"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#244B83"/>
+
+            <Button
+                android:id="@+id/btnCamara"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:text="TOMAR FOTOGRAFÍA"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#244B83"
+                android:layout_marginTop="12dp"/>
+
+            <Button
+                android:id="@+id/btnCerrarSesion"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:text="CERRAR SESIÓN"
+                android:textColor="#244B83"
+                android:backgroundTint="#E5EAF3"
+                android:layout_marginTop="25dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

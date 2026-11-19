@@ -54,24 +54,25 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 else -> {
-                    val valido = dbHelper.verificarUsuario(correo, password)
-
                     val existe = dbHelper.existeUsuario(correo)
+                    val valido = dbHelper.verificarUsuario(correo, password)
 
                     Toast.makeText(
                         this,
-                        "¿Usuario encontrado? $existe",
+                        "Usuario encontrado: $existe | Contraseña correcta: $valido",
                         Toast.LENGTH_LONG
                     ).show()
                     if (valido) {
-                        Toast.makeText(
-                            this,
-                            "¡Bienvenido!",
-                            Toast.LENGTH_SHORT
-                        ).show()
 
-                        // Próximamente abriremos la pantalla de perfil.
-                    } else {
+                        val intent = Intent(this, PerfilActivity::class.java)
+
+                        intent.putExtra("correo_usuario", correo)
+
+                        startActivity(intent)
+
+                        finish()
+                    }
+                    else {
                         Toast.makeText(
                             this,
                             "Correo o contraseña incorrectos",
