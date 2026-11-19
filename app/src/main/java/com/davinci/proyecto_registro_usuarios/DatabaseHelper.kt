@@ -44,11 +44,14 @@ class DatabaseHelper(context: Context) :
         return Base64.encodeToString(hash, Base64.NO_WRAP)
     }
 
+
     fun registrarUsuario(
         nombre: String,
         correo: String,
         password: String
     ): Boolean {
+
+        val correoNormalizado = correo.trim().lowercase()
 
         val salt = ByteArray(16)
         SecureRandom().nextBytes(salt)
@@ -56,8 +59,8 @@ class DatabaseHelper(context: Context) :
         val passwordHash = generarHash(password, salt)
 
         val valores = ContentValues().apply {
-            put("nombre", nombre)
-            put("correo", correo)
+            put("nombre", nombre.trim())
+            put("correo", correoNormalizado)
             put("password_hash", passwordHash)
             put("password_salt", Base64.encodeToString(salt, Base64.NO_WRAP))
         }
@@ -68,19 +71,21 @@ class DatabaseHelper(context: Context) :
 
         return resultado != -1L
     }
+
+
     fun verificarUsuario(correo: String, password: String): Boolean {
 
-        val db = readableDatabase
+        val correoNormalizado = correo.trim().lowercase()
 
+        val db = readableDatabase
         val cursor = db.rawQuery(
             "SELECT password_hash, password_salt FROM usuarios WHERE correo = ?",
-            arrayOf(correo)
+            arrayOf(correoNormalizado)
         )
 
         var valido = false
 
         if (cursor.moveToFirst()) {
-
             val hashGuardado = cursor.getString(0)
             val saltGuardado = cursor.getString(1)
 
@@ -95,12 +100,16 @@ class DatabaseHelper(context: Context) :
 
         return valido
     }
-    fun existeUsuario(correo: String): Boolean {
-        val db = readableDatabase
 
+
+    fun existeUsuario(correo: String): Boolean {
+
+        val correoNormalizado = correo.trim().lowercase()
+
+        val db = readableDatabase
         val cursor = db.rawQuery(
             "SELECT id FROM usuarios WHERE correo = ?",
-            arrayOf(correo.trim())
+            arrayOf(correoNormalizado)
         )
 
         val existe = cursor.moveToFirst()
@@ -110,6 +119,7 @@ class DatabaseHelper(context: Context) :
 
         return existe
     }
+
     fun obtenerNombre(correo: String): String? {
         val db = readableDatabase
 
